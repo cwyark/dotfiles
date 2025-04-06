@@ -5,16 +5,31 @@ install_fzf() {
   # Install fzf
   if ! command -v fzf >/dev/null 2>&1; then
     echo "Installing fzf..."
-    # You can use a package manager like apt, yum, or pacman depending on the distribution
-    if command -v apt >/dev/null 2>&1; then
-      sudo apt update && sudo apt install -y fzf
-    elif command -v yum >/dev/null 2>&1; then
-      sudo yum install -y fzf
-    elif command -v pacman >/dev/null 2>&1; then
-      sudo pacman -Syu fzf
+    # Define the download URL and target directory
+    FZF_URL="https://github.com/junegunn/fzf/releases/download/v0.61.1/fzf-0.61.1-linux_amd64.tar.gz"
+    TARGET_DIR="$HOME/.local/bin"
+
+    # Create the target directory if it doesn't exist
+    mkdir -p "$TARGET_DIR"
+
+    # Download and extract fzf
+    if command -v curl >/dev/null 2>&1; then
+      curl -L "$FZF_URL" -o /tmp/fzf.tar.gz
+    elif command -v wget >/dev/null 2>&1; then
+      wget "$FZF_URL" -O /tmp/fzf.tar.gz
     else
-      echo "No compatible package manager found. Please install fzf manually."
+      echo "Neither curl nor wget is available. Please install one of them to proceed."
+      return 1
     fi
+
+    # Extract the binary and move it to the target directory
+    tar -xzf /tmp/fzf.tar.gz -C /tmp
+    mv /tmp/fzf "$TARGET_DIR"
+
+    # Clean up
+    rm /tmp/fzf.tar.gz
+
+    echo "fzf installed successfully in $TARGET_DIR."
   else
     echo "fzf is already installed."
   fi
