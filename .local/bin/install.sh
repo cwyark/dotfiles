@@ -1,3 +1,3 @@
 #!/bin/env sh
 
-echo "hello !!!"
+echo "run install script"
