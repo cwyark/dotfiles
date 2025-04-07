@@ -2,12 +2,14 @@
 
 # Function to install fzf on Linux systems
 install_fzf() {
-  # Install fzf
-  if ! command -v fzf >/dev/null 2>&1; then
+  # Define the download URL and target directory
+  FZF_URL="https://github.com/junegunn/fzf/releases/download/v0.61.1/fzf-0.61.1-linux_amd64.tar.gz"
+  TARGET_DIR="$HOME/.local/bin"
+  FZF_BINARY="$TARGET_DIR/fzf"
+
+  # Check if fzf is already installed in the target directory
+  if [ ! -f "$FZF_BINARY" ]; then
     echo "Installing fzf..."
-    # Define the download URL and target directory
-    FZF_URL="https://github.com/junegunn/fzf/releases/download/v0.61.1/fzf-0.61.1-linux_amd64.tar.gz"
-    TARGET_DIR="$HOME/.local/bin"
 
     # Create the target directory if it doesn't exist
     mkdir -p "$TARGET_DIR"
@@ -31,7 +33,7 @@ install_fzf() {
 
     echo "fzf installed successfully in $TARGET_DIR."
   else
-    echo "fzf is already installed."
+    echo "fzf is already installed in $TARGET_DIR."
   fi
 }
 
