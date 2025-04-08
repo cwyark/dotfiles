@@ -2,7 +2,6 @@
 
 # Function to install fzf on Linux systems
 install_fzf() {
-<<<<<<< HEAD
   # Define the download URL and target directory
   FZF_URL="https://github.com/junegunn/fzf/releases/download/v0.61.1/fzf-0.61.1-linux_amd64.tar.gz"
   TARGET_DIR="$HOME/.local/bin"
@@ -73,14 +72,6 @@ install_lazygit() {
   else
     echo "lazygit is already installed in $TARGET_DIR."
   fi
-=======
-  # ... existing code ...
-}
-
-# Function to install lazygit on Linux systems
-install_lazygit() {
-  # ... existing code ...
->>>>>>> Snippet
 }
 
 # Function to install fnm on Linux systems
@@ -120,26 +111,10 @@ install_fnm() {
   fi
 }
 
-# Function to install Node.js v22.11.0 LTS using fnm
-install_node_v22() {
-  # Ensure fnm is in the PATH
-  export PATH="$HOME/.local/bin:$PATH"
-
-  # Initialize fnm
-  eval "$(fnm env --use-on-cd --shell bash)"
-
-  # Install Node.js v22.11.0 LTS
-  fnm install v22.11.0
-  fnm use v22.11.0
-
-  echo "Node.js v22.11.0 LTS installed and set as default."
-}
-
-# Call the functions to install fzf, lazygit, fnm, and Node.js v22.11.0 LTS
+# Call the functions to install fzf, lazygit, and fnm
 # Check if the system is Linux
 if [ "$(uname)" = "Linux" ]; then
   install_fzf
   install_lazygit
   install_fnm
-  install_node_v22
 fi
