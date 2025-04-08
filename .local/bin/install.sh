@@ -37,29 +37,8 @@ install_fzf() {
   fi
 }
 
-# Function to generate locales
-generate_locales() {
-  # Check if the script is run as root
-  # if [ "$(id -u)" -ne 0 ]; then
-  #   echo "This function must be run as root. Please use sudo."
-  #   return 1
-  # fi
-
-  # Uncomment the necessary locales in /etc/locale.gen
-  sed -i '/^#.*en_US.UTF-8 UTF-8/s/^#//' /etc/locale.gen
-
-  # Generate the locales
-  sudo locale-gen
-
-  # Create /etc/locale.conf and set the LANG variable
-  echo "LANG=en_US.UTF-8" >/etc/locale.conf
-
-  echo "Locales generated and LANG set to en_US.UTF-8."
-}
-
 # Call the function to install fzf
 # Check if the system is Linux
 if [ "$(uname)" = "Linux" ]; then
   install_fzf
-  generate_locales
 fi
